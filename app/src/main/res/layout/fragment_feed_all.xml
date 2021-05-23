@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/transparent"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+<!--            <FrameLayout-->
+<!--                android:id="@+id/flCityName"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:layout_marginStart="20dp"-->
+<!--                android:background="@drawable/bg_toolbar_city_name">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tvCityName"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:textColor="#333333"-->
+<!--                    android:singleLine="true"-->
+<!--                    android:paddingLeft="14dp"-->
+<!--                    android:paddingRight="14dp"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:fontFamily="sans-serif-medium"-->
+<!--                    tools:text="Кемеровский МО Кемеровский МО Кемеровский МО Кемеровский МО Кемеровский МО" />-->
+
+<!--            </FrameLayout>-->
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeToRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.example.petproject.moxymvp.lists.EmptyRecyclerView
+                android:id="@+id/rvList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <com.example.petproject.moxymvp.lists.SimpleEmptyView
+                android:id="@+id/emptyView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
+
+            <FrameLayout
+                android:id="@+id/loaderView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+                <ProgressBar
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center" />
+
+            </FrameLayout>
+
+            <com.example.petproject.common.MainFabUpView
+                android:id="@+id/fabUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end" />
+        </FrameLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</LinearLayout>
