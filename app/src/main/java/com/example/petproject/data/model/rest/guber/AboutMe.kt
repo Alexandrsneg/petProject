@@ -11,8 +11,10 @@ import java.util.Locale.ENGLISH
 
 @Parcelize
 data class AboutMe(
-    @SerializedName("widget_image") val widgetImage: String? = null,
-    val image: String? = null,
+    val age: Int? = null,
+    val avatar: String? = null,
+    val firstName: String? = null,
+    val secondName: String? = null,
     val contacts: Contacts? = null,
     val locales: Map<String, Localisation>? = null
 ) : Parcelable {

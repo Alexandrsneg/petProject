@@ -42,7 +42,7 @@ class AboutMeView @JvmOverloads constructor(
             tvAction.text = buttonText ?: context.getString(R.string.title_read_more)
         }
 
-        val url = data.widgetImage ?: data.image
+        val url = data.avatar ?: data.avatar
                 Glide.with(context)
                         .load(url)
                         .apply(RequestOptions().centerCrop())

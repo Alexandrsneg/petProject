@@ -1,21 +1,27 @@
 package com.example.petproject.presentation.main_feed.all
 
+import android.content.ContentValues
+import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.example.petproject.data.domain.IFeedRepository
-import com.example.petproject.utils.SubRX
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import info.esoft.ko.presentation.common.moxymvp.ABasePresenter
 import javax.inject.Inject
 
+
 @InjectViewState
 class FeedAllPresenter @Inject constructor(
-    private val interactor: IFeedRepository
+    private val repository: IFeedRepository
 ) : ABasePresenter<IFeedAllList>() {
 
     companion object {
         const val IS_LIKE_CLICKED = "IS_LIKE_CLICKED"
     }
 
+    val widgetsList: MutableList<WidgetFeed?>? = null
     private var items = mutableListOf<FeedItem>()
+    val dataBase = Firebase.firestore
 
     private var needRefreshContent = true
 
@@ -40,19 +46,28 @@ class FeedAllPresenter @Inject constructor(
     }
 
     private fun loadWidgetsFeed() {
-        interactor.loadWidgetFeed(SubRX { widgets, th ->
-            widgets?.forEach { widget ->
-                when (widget.id) {
-                    WidgetFeed.ABOUT_ME_WIDGET -> {
-                        widget.guber?.let {
-                            items.add(FeedItem(
-                                type = FeedItem.FEED_ITEM_GUBER_WIDGET,
-                                aboutMe = it
-                            ))
-                        }
+        dataBase.collection("widgets")
+            .get()
+            .addOnSuccessListener { result ->
+                if (!result.isEmpty) {
+                    result.forEach {
+                        widgetsList?.add(
+                            it.toObject(WidgetFeed::class.java)
+                        )
                     }
+                }
+                widgetsList?.forEach {
+                    when (it?.id) {
+                        WidgetFeed.ABOUT_ME_WIDGET -> {
+                            it.aboutMe?.let {
+                                items.add(FeedItem(
+                                    type = FeedItem.FEED_ITEM_GUBER_WIDGET,
+                                    aboutMe = it
+                                ))
+                            }
+                        }
 
-                    WidgetFeed.EVENTS_WIDGET -> {
+                        WidgetFeed.EVENTS_WIDGET -> {
 //                        widget.events?.let {
 //                            items.add(FeedItem(type = FeedItem.FEED_ITEM_EVENTS_WIDGET,
 //                                events = it,
@@ -60,17 +75,51 @@ class FeedAllPresenter @Inject constructor(
 //                                subTitle = widget.subTitle,
 //                                slidersFirstCard = widget.slidersFirstCard))
 //                        }
+                        }
                     }
                 }
-            }
-            viewState.stopRefreshing()
-            viewState.setData(items)
-            viewState.showLoadingProgress(false)
 
-            th?.let {
                 viewState.stopRefreshing()
+                viewState.setData(items)
+                viewState.showLoadingProgress(false)
             }
-        })
+            .addOnFailureListener { exception ->
+                viewState.stopRefreshing()
+                viewState.showLoadingProgress(false)
+                Log.w(ContentValues.TAG, "Error getting documents.", exception)
+            }
+
+//        repository.loadWidgetFeed(SubRX { widgets, th ->
+//            widgets?.forEach { widget ->
+//                when (widget.id) {
+//                    WidgetFeed.ABOUT_ME_WIDGET -> {
+//                        widget.aboutMe?.let {
+//                            items.add(FeedItem(
+//                                type = FeedItem.FEED_ITEM_GUBER_WIDGET,
+//                                aboutMe = it
+//                            ))
+//                        }
+//                    }
+//
+//                    WidgetFeed.EVENTS_WIDGET -> {
+////                        widget.events?.let {
+////                            items.add(FeedItem(type = FeedItem.FEED_ITEM_EVENTS_WIDGET,
+////                                events = it,
+////                                title = widget.title,
+////                                subTitle = widget.subTitle,
+////                                slidersFirstCard = widget.slidersFirstCard))
+////                        }
+//                    }
+//                }
+//            }
+//            viewState.stopRefreshing()
+//            viewState.setData(items)
+//            viewState.showLoadingProgress(false)
+//
+//            th?.let {
+//                viewState.stopRefreshing()
+//            }
+//        })
     }
 
 //    fun onLikeStatusNewsChanged(news: News, likesStatistic: EntityLikesStatistic?) {
