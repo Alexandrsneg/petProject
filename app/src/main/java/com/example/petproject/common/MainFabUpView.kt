@@ -8,11 +8,9 @@ import com.example.petproject.R
 import com.example.petproject.moxymvp.ABaseView
 import kotlinx.android.synthetic.main.main_fab_view.view.*
 
-@SuppressLint("NonConstantResourceId")
-@Layout(R.layout.main_fab_view)
 class MainFabUpView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : ABaseView(context, attrs, defStyleAttr) {
+) : ABaseView(R.layout.main_fab_view, context, attrs, defStyleAttr) {
 
     private var onClickListener: View.OnClickListener? = null
 

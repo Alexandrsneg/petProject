@@ -19,7 +19,7 @@ class FeedAllPresenter @Inject constructor(
         const val IS_LIKE_CLICKED = "IS_LIKE_CLICKED"
     }
 
-    val widgetsList: MutableList<WidgetFeed?>? = null
+    val widgetsList = mutableListOf<WidgetFeed?>()
     private var items = mutableListOf<FeedItem>()
     val dataBase = Firebase.firestore
 
@@ -51,12 +51,12 @@ class FeedAllPresenter @Inject constructor(
             .addOnSuccessListener { result ->
                 if (!result.isEmpty) {
                     result.forEach {
-                        widgetsList?.add(
+                        widgetsList.add(
                             it.toObject(WidgetFeed::class.java)
                         )
                     }
                 }
-                widgetsList?.forEach {
+                widgetsList.forEach {
                     when (it?.id) {
                         WidgetFeed.ABOUT_ME_WIDGET -> {
                             it.aboutMe?.let {

@@ -1,23 +1,19 @@
 package com.example.petproject.presentation.main_feed.about_me
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import android.util.AttributeSet
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.petproject.R
-import com.example.petproject.common.Layout
 import com.example.petproject.moxymvp.ABaseView
 import info.esoft.ko.data.model.rest.guber.AboutMe
 import kotlinx.android.synthetic.main.item_main_widget_guber.view.*
 import java.util.*
 
-@SuppressLint("NonConstantResourceId")
-@Layout(R.layout.item_main_widget_guber)
 class AboutMeView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : ABaseView(context, attrs, defStyleAttr) {
+) : ABaseView(R.layout.item_main_widget_guber, context, attrs, defStyleAttr) {
 
     private lateinit var data: AboutMe
 
