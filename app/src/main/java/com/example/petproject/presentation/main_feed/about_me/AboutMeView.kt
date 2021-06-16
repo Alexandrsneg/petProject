@@ -5,9 +5,11 @@ import android.os.Build
 import android.util.AttributeSet
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.RequestOptions.bitmapTransform
 import com.example.petproject.R
 import com.example.petproject.moxymvp.ABaseView
 import info.esoft.ko.data.model.rest.guber.AboutMe
+import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.item_main_widget_guber.view.*
 import java.util.*
 
@@ -44,5 +46,10 @@ class AboutMeView @JvmOverloads constructor(
                         .apply(RequestOptions().centerCrop())
                         .placeholder(R.drawable.shape_bg_button_violet_gradient)
                         .into(ivImage)
+
+        Glide.with(context)
+            .load(url)
+            .apply(bitmapTransform(BlurTransformation(25, 3)))
+            .into(ivGlass)
     }
 }

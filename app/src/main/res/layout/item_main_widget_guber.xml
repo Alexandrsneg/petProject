@@ -9,99 +9,100 @@
     android:layout_marginTop="22dp"
     android:layout_marginRight="16dp"
     android:layout_marginBottom="8dp"
-    android:orientation="vertical"
-    app:cardBackgroundColor="@color/white"
-    app:cardCornerRadius="10dp">
+    android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/cvRoot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        app:cardBackgroundColor="@color/transparent"
+        app:strokeColor="@color/white"
+        app:strokeWidth="1dp"
         app:cardCornerRadius="10dp">
 
         <ImageView
-            android:id="@+id/ivImageBlured"
+            android:id="@+id/ivGlass"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:alpha="0.4"/>
 
-            <LinearLayout
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="340dp"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:id="@+id/ivImage"
+                android:layout_width="match_parent"
+                android:layout_height="182dp"
+                android:scaleType="centerCrop" />
+
+
+            <TextView
+                android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:orientation="vertical">
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginRight="20dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="Здесь написано обо мне"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:id="@+id/tvBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="20dp"
+                android:fontFamily="sans-serif"
+                android:text="Провались в карточку, там есть ссылки"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <FrameLayout
+                android:id="@+id/flActionContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/ivImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="182dp"
-                    android:scaleType="centerCrop"/>
-
-                <TextView
-                    android:id="@+id/tvTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginRight="20dp"
-                    android:textSize="16sp"
-                    android:fontFamily="sans-serif-medium"
-                    android:textColor="@color/black"
-                    android:text="Здесь написано обо мне"/>
-
-
-                <TextView
-                    android:id="@+id/tvBody"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="20dp"
-                    android:textSize="15sp"
-                    android:fontFamily="sans-serif"
-                    android:text="Провались в карточку, там есть ссылки"
-                    android:textColor="@color/black" />
+                    android:layout_width="110dp"
+                    android:layout_height="84dp"
+                    android:scaleType="fitXY" />
 
                 <FrameLayout
-                    android:id="@+id/flActionContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:id="@+id/flAction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/shape_straight_line_button"
+                    android:foreground="?android:selectableItemBackground"
+                    android:padding="12dp">
 
-                    <ImageView
-                        android:layout_width="110dp"
-                        android:layout_height="84dp"
-                        android:scaleType="fitXY" />
-
-                    <FrameLayout
-                        android:id="@+id/flAction"
+                    <TextView
+                        android:id="@+id/tvAction"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="24dp"
-                        android:alpha="0.6"
-                        android:background="@drawable/shape_straight_line_button"
-                        android:foreground="?android:selectableItemBackground"
-                        android:padding="12dp">
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/title_read_more"
+                        android:textColor="#333333"
+                        android:textSize="14sp" />
 
-                        <TextView
-                            android:id="@+id/tvAction"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="24dp"
-                            android:layout_marginEnd="24dp"
-                            android:fontFamily="sans-serif-medium"
-                            android:text="@string/title_read_more"
-                            android:textColor="#333333"
-                            android:textSize="14sp" />
-
-                    </FrameLayout>
                 </FrameLayout>
-            </LinearLayout>
-
-
-    </androidx.cardview.widget.CardView>
-
+            </FrameLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>
 
