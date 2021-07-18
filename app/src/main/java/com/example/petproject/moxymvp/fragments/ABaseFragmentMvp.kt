@@ -14,13 +14,17 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.annotation.LayoutRes
 import com.example.petproject.AppChooserReceiver
 import com.example.petproject.R
 import com.example.petproject.common.LayoutUtils.getLayoutRes
 import com.example.petproject.moxymvp.SimpleNetworkErrorActionView
 
 
-abstract class ABaseFragmentMvp : MvpAppCompatFragment() {
+abstract class ABaseFragmentMvp @JvmOverloads constructor(
+    @LayoutRes
+    private val layoutId: Int = 0
+) : MvpAppCompatFragment() {
     internal val tag = this.javaClass.simpleName
 
     var networkErrorView: SimpleNetworkErrorActionView? = null
@@ -44,7 +48,10 @@ abstract class ABaseFragmentMvp : MvpAppCompatFragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(getLayoutRes(javaClass), container, false)
+        var layoutId = layoutId
+        if (layoutId == 0)
+            layoutId = getLayoutRes(javaClass)
+        return inflater.inflate(layoutId, container, false)
     }
 
     open fun showLoadingProgress(show: Boolean) {
