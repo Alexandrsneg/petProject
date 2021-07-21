@@ -3,6 +3,7 @@ package com.example.petproject.moxymvp.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.CallSuper
+import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,7 +15,7 @@ import com.example.petproject.moxymvp.lists.*
 import com.google.android.material.snackbar.Snackbar
 
 
-abstract class ABasePullListFragmentMvp<D, VH : RecyclerView.ViewHolder> : ABaseFragmentMvp(),
+abstract class ABasePullListFragmentMvp<D, VH : RecyclerView.ViewHolder> : ABaseFragmentMvp,
     IListView<D>, SwipeRefreshLayout.OnRefreshListener {
 
     protected var swipeToRefreshLayout: SwipeRefreshLayout? = null
@@ -27,6 +28,8 @@ abstract class ABasePullListFragmentMvp<D, VH : RecyclerView.ViewHolder> : ABase
 
 //    open var isShowDivider: Boolean = true
 
+    @JvmOverloads
+    constructor(@LayoutRes layoutId: Int = 0) : super(layoutId)
 
     @get:StringRes
     protected open val emptyViewText: Int = 0

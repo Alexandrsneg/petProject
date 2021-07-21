@@ -1,13 +1,11 @@
 package com.example.petproject.presentation.main_feed.all
 
-import android.content.DialogInterface
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +15,6 @@ import com.example.petproject.App
 import com.example.petproject.AppChooserReceiver
 import com.example.petproject.MainActivity
 import com.example.petproject.R
-import com.example.petproject.common.Layout
 import com.example.petproject.moxymvp.activities.ABaseActivity
 import com.example.petproject.moxymvp.lists.AListAdapter
 import com.example.petproject.moxymvp.fragments.ABasePullListFragmentMvp
@@ -26,8 +23,8 @@ import com.example.petproject.presentation.main_feed.popups.OnboardingPopUpAddAd
 import kotlinx.android.synthetic.main.fragment_feed_all.*
 import javax.inject.Inject
 
-@Layout(R.layout.fragment_feed_all)
-class FeedAllFragment : ABasePullListFragmentMvp<FeedItem, RecyclerView.ViewHolder>(),
+
+class FeedAllFragment : ABasePullListFragmentMvp<FeedItem, RecyclerView.ViewHolder>(R.layout.fragment_feed_all),
     IFeedAllList {
 
     override val emptyViewText = 0
@@ -115,7 +112,7 @@ class FeedAllFragment : ABasePullListFragmentMvp<FeedItem, RecyclerView.ViewHold
         showShareAppChooser(activity, uri, text, link, shareType, AppChooserReceiver.SHARE_FROM_MAIN_FEED, shareObject)
     }
 
-    override fun showCityToolbar(cityName: String) {
+    override fun showMainScreenToolbar(title: String) {
 //        tvCityName.text = cityName
     }
 

@@ -11,7 +11,7 @@ interface IFeedAllList : IStopPullRefresh<FeedItem> {
     @StateStrategyType(SkipStrategy::class)
     fun showShareAppChooser(uri: Uri?, text: String?, link: String?, shareType: String, shareObject: Any)
 
-    fun showCityToolbar(cityName: String)
+    fun showMainScreenToolbar(title: String)
 
     fun showOnboardingPopUp(onboardingModel: OnboardingModel)
 }

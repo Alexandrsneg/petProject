@@ -32,7 +32,7 @@ class FeedAllPresenter @Inject constructor(
 
     override fun attachView(view: IFeedAllList?) {
         super.attachView(view)
-        viewState.showCityToolbar( "Главная лента")
+        viewState.showMainScreenToolbar( "Главная лента")
 
         if (needRefreshContent) {
             onRefresh()
@@ -50,6 +50,7 @@ class FeedAllPresenter @Inject constructor(
             .get()
             .addOnSuccessListener { result ->
                 if (!result.isEmpty) {
+                    widgetsList.clear()
                     result.forEach {
                         widgetsList.add(
                             it.toObject(WidgetFeed::class.java)
