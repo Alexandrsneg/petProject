@@ -27,7 +27,7 @@ class RightMenuActivity : ABaseActivity() {
         super.onCreate(savedInstanceState)
         ivCloseScreen.setOnClickListener { finish() }
         llProfile.setOnClickListener {
-//            BugReportActivity.runActivity(this)
+            VideoViewerActivity.runActivity(this)
         }
     }
 }
