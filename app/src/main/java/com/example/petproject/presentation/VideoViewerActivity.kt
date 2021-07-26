@@ -1,29 +1,19 @@
 package com.example.petproject.presentation
 
-import android.app.Activity
-import android.content.ContentUris
-import android.content.ContentValues
+import android.Manifest
 import android.content.Context
 import android.content.Intent
-import android.graphics.Typeface
-import android.media.MediaMetadataRetriever
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
-import android.provider.MediaStore
-import android.util.Log
 import android.widget.MediaController
-import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.example.petproject.AActivityForResult
-import com.example.petproject.IOnActivityResultListener
 import com.example.petproject.R
 import com.example.petproject.common.Layout
-import com.video.trimmer.interfaces.OnTrimVideoListener
-import com.video.trimmer.interfaces.OnVideoListener
 import com.video.trimmer.utils.FileUtils
 import kotlinx.android.synthetic.main.video_viewer_activity.*
-import java.io.File
 
 
 @Layout(value = R.layout.video_viewer_activity)
@@ -94,8 +84,25 @@ class VideoViewerActivity : AActivityForResult()
              }
              intent.type = "video/*"; // Только видео
 
-             runActivityForResult(intent, 111)
 
+             val writePermission = ContextCompat.checkSelfPermission(
+                 this,
+                 Manifest.permission.WRITE_EXTERNAL_STORAGE
+             )
+             val readPermission = ContextCompat.checkSelfPermission(
+                 this,
+                 Manifest.permission.READ_EXTERNAL_STORAGE
+             )
+
+             if (writePermission != PackageManager.PERMISSION_GRANTED && readPermission != PackageManager.PERMISSION_GRANTED)
+                 runRequestPermissions(
+                     arrayOf(
+                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                         Manifest.permission.READ_EXTERNAL_STORAGE
+                     ), 111
+                 )
+             else
+             runActivityForResult(intent, 111)
          }
 
          override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -109,6 +116,21 @@ class VideoViewerActivity : AActivityForResult()
                      startTrimActivity(it)
                      showToast(requestCode.toString())
                  }
+             }
+         }
+
+         override fun onRequestPermissionsResult(
+             requestCode: Int,
+             permissions: Array<out String>,
+             grantResults: IntArray
+         ) {
+             super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+             if (grantResults.isNotEmpty() && grantResults.all { it == PackageManager.PERMISSION_GRANTED })
+             if (requestCode == 111) {
+                 val intent = Intent(Intent.ACTION_PICK).apply {
+                     type = "video/*"
+                 }
+                 runActivityForResult(intent, 111)
              }
          }
 
