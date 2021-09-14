@@ -109,12 +109,12 @@ class VideoViewerActivity : AActivityForResult()
              super.onActivityResult(requestCode, resultCode, data)
 
              if (requestCode == 111) {
-                 showToast(requestCode.toString())
+                 toast(requestCode.toString())
                  val selectedVideo = data?.data
 //                 val path = getRealPathFromURI(selectedVideo!!, this)
                  selectedVideo?.let {
                      startTrimActivity(it)
-                     showToast(requestCode.toString())
+                     toast(requestCode.toString())
                  }
              }
          }

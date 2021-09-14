@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable/ic_gps_blue.xml" value="0.3494791666666667" />
+        <entry key="app/src/main/res/drawable/ic_pdf.xml" value="0.3494791666666667" />
+        <entry key="app/src/main/res/drawable/ic_phone_blue.xml" value="0.3494791666666667" />
+        <entry key="app/src/main/res/drawable/ic_raw_down_violet.xml" value="0.3494791666666667" />
+        <entry key="app/src/main/res/layout/about_me_detail.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/info_item_view.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/item_main_widget_guber.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/item_question_response_document.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/tool_bar.xml" value="0.3333333333333333" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

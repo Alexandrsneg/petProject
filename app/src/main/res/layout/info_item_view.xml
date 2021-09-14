@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp">
+
+    <ImageView
+        android:layout_marginTop="1dp"
+        android:id="@+id/ivIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="24dp"
+        tools:src="@drawable/ic_gps_blue"/>
+
+    <TextView
+        android:id="@+id/tvMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text=""
+        android:textSize="15sp"
+        android:textColor="#333333"
+        android:layout_toEndOf="@id/ivIcon"
+        android:layout_toStartOf="@id/flToggleContainer"/>
+
+    <FrameLayout
+        android:layout_marginTop="1dp"
+        android:id="@+id/flToggleContainer"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="15dp"
+            app:srcCompat="@drawable/ic_raw_down_violet"
+            android:layout_gravity="end"
+            app:tint="#399CCB" />
+    </FrameLayout>
+</RelativeLayout>

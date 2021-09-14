@@ -2,4 +2,11 @@
 <resources>
     <declare-styleable name="MainFABView">
     </declare-styleable>
+
+    <declare-styleable name="InfoItemView">
+        <attr name="iiv_icon" format="reference" />
+        <attr name="iiv_message" format="string" />
+        <attr name="iiv_iconMarginEnd" format="dimension" />
+        <attr name="iiv_expanded" format="boolean" />
+    </declare-styleable>
 </resources>

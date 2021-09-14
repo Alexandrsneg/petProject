@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/tool_bar" />
+
+    <ScrollView
+        android:id="@+id/svScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvRoot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="16dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/ivImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="184dp"
+                        android:scaleType="centerCrop" />
+
+                    <TextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginRight="20dp"
+                        android:textSize="16sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="@color/black"
+                        android:text="Тут написано более детально!"/>
+
+
+                    <TextView
+                        android:id="@+id/tvContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="20dp"
+                        android:textSize="15sp"
+                        android:fontFamily="sans-serif"
+                        tools:text="Много текста"
+                        android:textColor="@color/black" />
+
+                    <LinearLayout
+                        android:id="@+id/llGuberInfoContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/llDocuments"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginRight="20dp"
+                            android:orientation="vertical"
+                            android:visibility="gone"
+                            tools:visibility="visible">
+
+                            <com.example.petproject.common.views.AttachmentDocumentView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone"
+                                tools:visibility="visible"/>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llSites"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="20dp"
+                            android:orientation="vertical"
+                            android:visibility="gone"
+                            tools:visibility="visible">
+
+                            <com.example.petproject.common.views.InfoItemView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:iiv_icon="@drawable/ic_globe_blue"
+                                app:iiv_message="www.site.com"/>
+
+                        </LinearLayout>
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="8dp"
+                            android:layout_height="1dp"
+                            android:background="#80B1B3C9" />
+
+                        <TextView
+                            android:id="@+id/tvSubDesc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="24dp"
+                            android:layout_marginRight="20dp"
+                            android:textSize="15sp"
+                            android:fontFamily="sans-serif"
+                            tools:text="Суб описание"
+                            android:textColor="@color/black" />
+
+                        <com.example.petproject.common.views.InfoItemView
+                            android:id="@+id/iivMail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            app:iiv_icon="@drawable/ic_globe_blue"
+                            app:iiv_message="www.site@42mail.ru"/>
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_height="1dp"
+                            android:background="#80B1B3C9" />
+
+                        <com.example.petproject.common.views.InfoItemView
+                            android:id="@+id/iivPhone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            app:iiv_icon="@drawable/ic_phone_blue"
+                            app:iiv_message="25-25-25"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llVideoContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="16dp"
+                        android:visibility="gone"
+                        tools:visibility="visible"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvLinksBlockTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:fontFamily="sans-serif-medium"
+                            android:textColor="@color/black"
+                            android:text="Видеоотчеты"/>
+
+                        <LinearLayout
+                            android:id="@+id/llFirstThreeLinksContainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"/>
+
+                        <LinearLayout
+                            android:id="@+id/llRemainingLinksContainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            android:orientation="vertical"/>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnOpenAll"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="36dp"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:layoutDirection="rtl"
+                            android:letterSpacing="0.0"
+                            android:stateListAnimator="@null"
+                            android:text="Открыть все"
+                            android:textAllCaps="false"
+                            android:textColor="#399CCB"
+                            android:textSize="12sp"
+                            app:cornerRadius="20dp"
+                            app:icon="@drawable/ic_raw_down_violet"
+                            app:rippleColor="#1A000000"
+                            app:strokeColor="#399CCB"
+                            android:visibility="gone"
+                            app:iconTint="#399CCB"
+                            tools:visibility="visible"
+                            app:strokeWidth="1dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</LinearLayout>

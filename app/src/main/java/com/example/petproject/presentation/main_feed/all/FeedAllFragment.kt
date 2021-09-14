@@ -100,11 +100,11 @@ class FeedAllFragment : ABasePullListFragmentMvp<FeedItem, RecyclerView.ViewHold
     }
 
     override fun showError(@StringRes message: Int) {
-        (activity as MainActivity).showError(message)
+//        (activity as MainActivity).showError(message)
     }
 
     override fun showError(message: String?) {
-        (activity as MainActivity).showError(message)
+//        (activity as MainActivity).showError(message)
     }
 
     override fun showShareAppChooser(uri: Uri?, text: String?, link: String?, shareType: String, shareObject: Any) {

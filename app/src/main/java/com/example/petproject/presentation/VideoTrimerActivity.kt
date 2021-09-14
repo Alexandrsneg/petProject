@@ -93,7 +93,7 @@ class VideoTrimerActivity : AActivityForResult(), OnTrimVideoListener, OnVideoLi
     }
 
     override fun onError(message: String) {
-        showToast("onError")
+        toast("onError")
     }
 
     override fun onTrimStarted() {
@@ -102,7 +102,7 @@ class VideoTrimerActivity : AActivityForResult(), OnTrimVideoListener, OnVideoLi
 
 
     override fun onVideoPrepared() {
-        showToast("onVideoPrepared")
+        toast("onVideoPrepared")
     }
 
     private fun compressVideo() {
@@ -122,13 +122,13 @@ class VideoTrimerActivity : AActivityForResult(), OnTrimVideoListener, OnVideoLi
                         Output video size : ${fileSizeInMB}mb
                         """.trimIndent()
                     pbLoader.visibility = View.GONE
-                    showToast(s)
+                    toast(s)
                     finish()
                 }
             }
 
             override fun onFailure(message: String?) {
-                showToast(message)
+                toast(message!!)
                 Log.d("FFMPEG", message!!)
             }
 
