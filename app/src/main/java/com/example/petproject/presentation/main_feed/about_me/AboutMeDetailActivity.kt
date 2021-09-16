@@ -62,8 +62,6 @@ class AboutMeDetailActivity : ABaseActivity(AboutMeDetailBinding::class.java) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        observeData()
-        viewModel.getDetailInfo()
 
         //для многострочного отображения заголовка на устройствах с низким разрешением
         val toolbarTitle = findViewById<TextView>(R.id.toolbarMultilineTitle)
@@ -79,6 +77,9 @@ class AboutMeDetailActivity : ABaseActivity(AboutMeDetailBinding::class.java) {
 //                    binding.svScrollView.smoothScrollTo(0,  binding.llVideoContainer.bottom)
 //                }, 500)
 //        }
+
+        observeData()
+        viewModel.getDetailInfo()
 
     }
 
@@ -131,7 +132,7 @@ class AboutMeDetailActivity : ABaseActivity(AboutMeDetailBinding::class.java) {
                     addInfoView(this@AboutMeDetailActivity, site)
                 }
             }
-        } ?: finish()
+        }
 
     }
 

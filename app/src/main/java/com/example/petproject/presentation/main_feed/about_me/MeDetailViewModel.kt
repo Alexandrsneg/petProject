@@ -1,5 +1,6 @@
 package com.example.petproject.presentation.main_feed.about_me
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import info.esoft.ko.data.model.rest.guber.AdminProfile
@@ -34,14 +35,16 @@ class MeDetailViewModel : ViewModel() {
 
     fun getDetailInfo() {
         _loading.value = true
-        job = viewModelScope.launch(Dispatchers.IO + myExceptionHandler) {
+        job = viewModelScope.launch(Dispatchers.Main + myExceptionHandler) {
+
             detailInfoUseCase.getDetailInfo()
             detailInfoUseCase.detailInfoFlow?.collect {
+                Log.d("FLOW collect", it.toString())
                 _detailInfo.value = it
                 _loading.value = false
-            }
-            detailInfoUseCase.exceptionFlow?.collect {
-                onError(it)
+                detailInfoUseCase.exceptionFlow?.collect {
+                    onError(it)
+                }
             }
         }
 
