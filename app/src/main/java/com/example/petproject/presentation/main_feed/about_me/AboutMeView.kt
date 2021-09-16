@@ -21,7 +21,7 @@ class AboutMeView @JvmOverloads constructor(
 
     init {
         flAction.setOnClickListener {
-//            GuberDetailActivity.show(it.context, data)
+            AboutMeDetailActivity.show(it.context)
         }
     }
 

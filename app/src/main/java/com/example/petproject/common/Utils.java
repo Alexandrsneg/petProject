@@ -511,4 +511,22 @@ public class Utils {
     public static float getRoundedDecimalValueRub(long value) {
         return new BigDecimal(String.valueOf(value * KOP_DECIMAL_RATIO)).setScale(2, RoundingMode.DOWN).floatValue();
     }
+
+    public static boolean openPhoneCall(Context context, String phone) {
+        try {
+            context.startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+ phone)));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public static boolean openMailApp(Context context, String mail) {
+        try {
+            context.startActivity(new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"+ mail)));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

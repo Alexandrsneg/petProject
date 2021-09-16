@@ -8,7 +8,7 @@ import android.widget.RelativeLayout
 import androidx.appcompat.content.res.AppCompatResources
 import com.example.petproject.R
 import com.example.petproject.common.Utils
-import com.example.petproject.data.model.rest.Common.Link
+import com.example.petproject.data.model.rest.guber.Site
 import com.example.petproject.moxymvp.ABaseView
 import kotlinx.android.synthetic.main.info_item_view.view.*
 
@@ -19,7 +19,7 @@ class InfoItemView @JvmOverloads constructor(
 
     private var onClickListener: OnClickListener? = null
 
-    fun bind(link: Link){
+    fun bind(link: Site){
         tvMessage.apply {
             text = link.title
             setOnClickListener {

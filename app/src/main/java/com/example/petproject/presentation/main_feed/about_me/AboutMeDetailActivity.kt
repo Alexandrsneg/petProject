@@ -1,18 +1,18 @@
 package com.example.petproject.presentation.main_feed.about_me
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.petproject.R
@@ -20,9 +20,12 @@ import com.example.petproject.common.Utils
 import com.example.petproject.common.views.AttachmentDocumentView
 import com.example.petproject.common.views.InfoItemView
 import com.example.petproject.data.model.rest.Attachment
-import com.example.petproject.data.model.rest.Common.Link
+import com.example.petproject.data.model.rest.guber.Site
 import com.example.petproject.databinding.AboutMeDetailBinding
 import com.example.petproject.moxymvp.activities.ABaseActivity
+import com.google.android.material.snackbar.Snackbar
+import info.esoft.ko.data.model.rest.guber.AdminProfile
+import kotlinx.coroutines.flow.collect
 import java.util.*
 
 class AboutMeDetailActivity : ABaseActivity(AboutMeDetailBinding::class.java) {
@@ -34,6 +37,10 @@ class AboutMeDetailActivity : ABaseActivity(AboutMeDetailBinding::class.java) {
         fun show(context: Context?) {
             context?.startActivity(Intent(context, AboutMeDetailActivity::class.java))
         }
+    }
+
+    private val viewModel by lazy {
+        ViewModelProviders.of(this).get(MeDetailViewModel::class.java)
     }
 
     private val binding: AboutMeDetailBinding get() = getViewBinding()
@@ -55,7 +62,8 @@ class AboutMeDetailActivity : ABaseActivity(AboutMeDetailBinding::class.java) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val guber = getMeDetail() // todo добавить в FB модель деталки, попробовать через MVVM и корутины
+        observeData()
+        viewModel.getDetailInfo()
 
         //для многострочного отображения заголовка на устройствах с низким разрешением
         val toolbarTitle = findViewById<TextView>(R.id.toolbarMultilineTitle)
@@ -65,56 +73,66 @@ class AboutMeDetailActivity : ABaseActivity(AboutMeDetailBinding::class.java) {
         }
         showBackArrow(true)
 
-        val localisation: Locale? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            resources.configuration.locales.get(0)
-        } else {
-            null
+//        getScroll()?.let {
+//            if (it)
+//                binding.svScrollView.postDelayed(Runnable {
+//                    binding.svScrollView.smoothScrollTo(0,  binding.llVideoContainer.bottom)
+//                }, 500)
+//        }
+
+    }
+
+    private fun observeData() {
+        lifecycleScope.launchWhenStarted {
+            viewModel.detailInfo.collect {
+                insertLoadedDetailInfo(it)
+            }
         }
 
-        getScroll()?.let {
-            if (it)
-                binding.svScrollView.postDelayed(Runnable {
-                    binding.svScrollView.smoothScrollTo(0,  binding.llVideoContainer.bottom)
-                }, 500)
+        lifecycleScope.launchWhenStarted {
+            viewModel.loadError.collect {
+                if (it.isNotBlank())
+                    Snackbar.make(binding.root, it, 2000).show()
+            }
         }
+    }
 
-
-        guber?.let {
-            val url = it.image
+    @SuppressLint("SetTextI18n")
+    private fun insertLoadedDetailInfo(detailInfo: AdminProfile) {
+        detailInfo.let {
+            val url = it.avatar
             Glide.with(this)
                 .load(url)
                 .apply(RequestOptions().centerCrop())
-                .placeholder(R.drawable.bg_image_placeholder)
-                .into( binding.ivImage)
+                .into(binding.ivImage)
 
-            it.getLocale(localisation)?.apply {
-                binding.llDocuments.removeAllViews()
-                attachments?.forEach { attachment ->
-                    addDocument(this@GuberDetailActivity, attachment)
-                }
-                binding.tvTitle.text = title
-                binding.tvContent.text = content
-                binding.tvSubDesc.text = subDesc
+
+            binding.llDocuments.removeAllViews()
+            it.attachments?.forEach { attachment ->
+                addDocument(this, attachment)
             }
+            binding.tvTitle.text = "${it.firstName} ${it.secondName}, ${it.age} лет"
+            binding.tvContent.text = it.aboutMe
+//            binding.tvSubDesc.text = subDesc
 
-            binding.tvLinksBlockTitle.text = it.linksBlockTitle ?: "Видеоотчеты"
 
             it.contacts?.apply {
                 binding.iivMail.message = mail ?: ""
                 binding.iivMail.setOnClickListener {
-                    Utils.openMailApp(this@GuberDetailActivity, mail)
+                    Utils.openMailApp(this@AboutMeDetailActivity, mail)
                 }
-                binding.iivPhone.message = phoneDescription ?: ""
+                binding.iivPhone.message = phone ?: ""
                 binding.iivPhone.setOnClickListener {
-                    Utils.openPhoneCall(this@GuberDetailActivity, phoneDescription)
+                    Utils.openPhoneCall(this@AboutMeDetailActivity, phone)
                 }
 
                 binding.llSites.removeAllViews()
-                links?.forEach { site ->
-                    addInfoView(this@GuberDetailActivity, site)
+                it.contacts.sites?.forEach { site ->
+                    addInfoView(this@AboutMeDetailActivity, site)
                 }
             }
         } ?: finish()
+
     }
 
     //добавление ПДФок
@@ -132,7 +150,7 @@ class AboutMeDetailActivity : ABaseActivity(AboutMeDetailBinding::class.java) {
     }
 
     //добавление ссылок на сайты
-    private fun addInfoView(context: Context, link: Link) {
+    private fun addInfoView(context: Context, link: Site) {
         binding.llSites.visibility = View.VISIBLE
         if (binding.llSites.childCount > 0)
             binding.llSites.addView(FrameLayout(context).apply {

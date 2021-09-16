@@ -7,8 +7,7 @@
     android:minHeight="?attr/actionBarSize"
     app:layout_scrollFlags="scroll|enterAlways"
     android:background="@android:color/transparent"
-    app:titleTextColor="#333333"
-    app:theme="@style/ToolbarColoredBackArrow">
+    app:titleTextColor="#333333">
 
     <TextView
         android:id="@+id/toolbarMultilineTitle"
